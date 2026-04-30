@@ -1,0 +1,14 @@
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+sqlalchemy==2.0.36
+psycopg2-binary==2.9.10
+pydantic-settings==2.7.0
+python-dotenv==1.0.1
+
+# Day 2 — auth
+# python-jose[cryptography]==3.3.0
+# passlib[bcrypt]==1.7.4
+
+# Day 4 — tests
+# pytest==8.3.4
+# httpx==0.28.1
