@@ -1,32 +1,28 @@
 # Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
 
 # Virtual environments
 .venv/
 venv/
 env/
 
-# Environment variables — NEVER commit
+# Environment variables — CRÍTICO no subir
 .env
 
 # IDE
 .vscode/
 .idea/
-*.swp
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Testing & coverage
+# Testing
 .pytest_cache/
 .coverage
 htmlcov/
 
-# Distribution
-build/
-dist/
-*.egg-info/
+# OS
+.DS_Store
+Thumbs.db
