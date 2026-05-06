@@ -4,13 +4,12 @@ from fastapi import FastAPI
 
 from app.core.config import settings
 from app.core.database import Base, engine
-from app.models import user  # noqa: F401  (import necesario para registrar el modelo)
-from app.routes import auth, health
+from app.models import task, user  # noqa: F401  (necesario para registrar modelos)
+from app.routes import auth, health, tasks
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Crea las tablas si no existen al arrancar la app
     Base.metadata.create_all(bind=engine)
     yield
 
@@ -25,6 +24,7 @@ app = FastAPI(
 
 app.include_router(health.router)
 app.include_router(auth.router)
+app.include_router(tasks.router)
 
 
 @app.get("/", tags=["Root"])
