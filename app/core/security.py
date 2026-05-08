@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta, timezone
 
 import bcrypt
-from jose import JWTError, jwt
+import jwt
+from jwt.exceptions import InvalidTokenError
 
 from app.core.config import settings
 
@@ -35,5 +36,5 @@ def decode_access_token(token: str) -> dict | None:
     """Verifica firma + expiración del JWT. Devuelve el payload o None si inválido."""
     try:
         return jwt.decode(token, settings.jwt_secret_key, algorithms=[settings.jwt_algorithm])
-    except JWTError:
+    except InvalidTokenError:
         return None
