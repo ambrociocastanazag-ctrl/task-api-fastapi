@@ -1,0 +1,28 @@
+# Virtual environment — tiene binarios de Windows, no sirve en Linux
+.venv/
+venv/
+
+# Variables de entorno — se inyectan via docker-compose
+.env
+
+# Cache de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Tests — no necesarios en la imagen de producción
+tests/
+pytest.ini
+requirements-dev.txt
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# Documentación y extras
+README.md
+*.md

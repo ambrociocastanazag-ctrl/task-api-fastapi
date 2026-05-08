@@ -1,0 +1,38 @@
+services:
+
+  # ─── Base de datos ──────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: taskapi
+      POSTGRES_USER: taskapi_user
+      POSTGRES_PASSWORD: taskapi_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"   # 5433 en host para no chocar con tu Postgres local (5432)
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taskapi_user -d taskapi"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ─── API FastAPI ────────────────────────────────────────────
+  api:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg2://taskapi_user:taskapi_pass@db:5432/taskapi
+      JWT_SECRET_KEY: docker-dev-secret-change-in-production
+      JWT_ALGORITHM: HS256
+      JWT_EXPIRATION_MINUTES: "60"
+      DEBUG: "False"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
